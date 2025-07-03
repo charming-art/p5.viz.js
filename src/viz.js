@@ -6,11 +6,6 @@ export class Viz {
     this._options = {width, height, x: 0, y: 0};
     this._marks = [];
   }
-  size(width, height) {
-    this._options.width = width;
-    this._options.height = height;
-    return this;
-  }
   add(mark) {
     this._marks.push(mark);
   }

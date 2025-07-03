@@ -1,6 +1,6 @@
 export class Mark {
-  constructor() {
-    this._options = {};
+  constructor(options = {}) {
+    this._options = options;
   }
   x(value) {
     this._options.x = value;
@@ -13,6 +13,9 @@ export class Mark {
   data(value) {
     this._options.data = value;
     return this;
+  }
+  useShape(shape) {
+    this._options.shape = shape;
   }
   render() {}
 }

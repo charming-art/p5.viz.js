@@ -2,9 +2,17 @@ import {registerAPI} from "./register.js";
 import {Mark, encode} from "./mark.js";
 import {range, max, scaleLinear, scaleBand} from "d3";
 
+function defaultShape({x, y, w, h}) {
+  fill("black");
+  rect(x, y, w, h);
+}
+
 export class BarY extends Mark {
+  constructor() {
+    super({shape: defaultShape});
+  }
   render(options, {width, height, x: dx, y: dy}) {
-    const {x, y, data} = options;
+    const {x, y, data, shape} = options;
     const I = range(data.length);
     const X = data.map(encode(x));
     const Y = data.map(encode(y));
@@ -17,8 +25,7 @@ export class BarY extends Mark {
       const y0 = scaleY(Y[i]);
       const w = scaleX.bandwidth();
       const h = height - y0;
-      fill("black");
-      rect(x0, y0, w, h);
+      shape({x: x0, y: y0, w, h, datum: data[i]});
     }
   }
 }
