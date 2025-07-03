@@ -3,19 +3,14 @@ async function setup() {
   noLoop();
 
   // Load data
-  const data = [
-    {genre: "Sports", sold: 275},
-    {genre: "Strategy", sold: 115},
-    {genre: "Action", sold: 120},
-    {genre: "Shooter", sold: 350},
-    {genre: "Other", sold: 150},
-  ];
+  const response = await fetch("data/alphabets.json");
+  const data = await response.json();
 
   // Create bar mark
   const barY = new p5.BarY();
   barY.data(data);
-  barY.x("genre");
-  barY.y("sold");
+  barY.x("letter");
+  barY.y("frequency");
 
   // Create a visualization and add the bar mark
   const viz = new p5.Viz();
