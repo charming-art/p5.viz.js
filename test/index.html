@@ -3,15 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Examples</title>
   </head>
   <body>
-    <script type="module">
-      import p5 from "p5";
-      import {viz} from "../src/index.js";
-      p5.registerAddon(viz);
-      window.p5 = p5;
+    <select id="sketch-select"></select>
+    <div id="iframe-container"></div>
+    <script>
+      document.getElementById("sketch-select").addEventListener("change", function (e) {
+        loadSketchIframe(e.target.value);
+      });
+
+      populateSketchDropdown();
+
+      async function populateSketchDropdown() {
+        const select = document.getElementById("sketch-select");
+        const res = await fetch("examples/index.json");
+        const sketches = await res.json();
+        select.innerHTML = "";
+        sketches.forEach((sketch) => {
+          const option = document.createElement("option");
+          option.value = `examples/${sketch}.js`;
+          option.textContent = sketch;
+          select.appendChild(option);
+        });
+        // Load the first sketch by default
+        if (sketches.length > 0) {
+          loadSketchIframe(select.value);
+        }
+      }
+
+      function loadSketchIframe(sketchFile) {
+        const container = document.getElementById("iframe-container");
+        container.innerHTML = "";
+        const iframe = document.createElement("iframe");
+        iframe.width = window.innerWidth;
+        iframe.height = window.innerHeight;
+        iframe.style.border = "none";
+        iframe.src = `sketch.html?file=${encodeURIComponent(sketchFile)}`;
+        container.appendChild(iframe);
+      }
     </script>
-    <script src="sketch.js"></script>
   </body>
 </html>
