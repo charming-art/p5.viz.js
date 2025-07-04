@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sketch Frame</title>
+  </head>
+  <body>
+    <script type="module">
+      import p5 from "p5";
+      import {viz} from "../src/index.js";
+      p5.registerAddon(viz);
+      window.p5 = p5;
+    </script>
+    <script type="module">
+      // Get sketch file from query string
+      const params = new URLSearchParams(window.location.search);
+      const sketchFile = params.get("file");
+      if (sketchFile) {
+        const script = document.createElement("script");
+        script.src = sketchFile;
+        document.body.appendChild(script);
+      } else {
+        document.body.innerHTML += "<p>No sketch file specified.</p>";
+      }
+    </script>
+  </body>
+</html>

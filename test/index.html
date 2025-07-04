@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examples</title>
+  </head>
+  <body>
+    <select id="sketch-select"></select>
+    <div id="iframe-container"></div>
+    <script>
+      document.getElementById("sketch-select").addEventListener("change", function (e) {
+        setSketchParam(e.target.options[e.target.selectedIndex].text);
+        loadSketchIframe(e.target.value);
+      });
+
+      populateSketchDropdown();
+
+      function getSketchParam() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('sketch');
+      }
+      
+      function setSketchParam(sketchName) {
+        const params = new URLSearchParams(window.location.search);
+        params.set('sketch', sketchName);
+        history.replaceState(null, '', '?' + params.toString());
+      }
+
+      async function populateSketchDropdown() {
+        const select = document.getElementById("sketch-select");
+        const res = await fetch("examples/index.json");
+        const sketches = await res.json();
+        select.innerHTML = "";
+        sketches.forEach((sketch) => {
+          const option = document.createElement("option");
+          option.value = `examples/${sketch}.js`;
+          option.textContent = sketch;
+          select.appendChild(option);
+        });
+        // Select from URL if present
+        const sketchParam = getSketchParam();
+        if (sketchParam) {
+          const found = Array.from(select.options).find(opt => opt.text === sketchParam);
+          if (found) {
+            select.value = found.value;
+          }
+        }
+        // Load the selected sketch
+        if (select.value) {
+          loadSketchIframe(select.value);
+        }
+      }
+
+      function loadSketchIframe(sketchFile) {
+        const container = document.getElementById("iframe-container");
+        container.innerHTML = "";
+        const iframe = document.createElement("iframe");
+        iframe.width = window.innerWidth;
+        iframe.height = window.innerHeight;
+        iframe.style.border = "none";
+        iframe.src = `sketch.html?file=${encodeURIComponent(sketchFile)}`;
+        container.appendChild(iframe);
+      }
+    </script>
+  </body>
+</html>
