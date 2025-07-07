@@ -15,14 +15,14 @@ async function setup() {
   // Use custom shape
   barY.useShape(({x, y, w, h, datum}) => {
     const txt = datum.letter;
-    const tw = textWidth(txt);
-    const th = (textAscent() + textDescent()) * 0.64;
+    const tw = fontWidth(txt);
+    const th = fontAscent();
     fill("black");
     rect(x, y, w, h);
     push();
     translate(x, y + h);
     fill("white");
-    scale(w / tw, h / th);
+    scale(w / tw, h / th * 1.2);
     text(txt, 0, 0);
     pop();
   });
