@@ -11,19 +11,12 @@ function onwarn(warning, warn) {
   warn(warning);
 }
 
-export default [
-  {
-    input: "src/index.js",
-    external: [/^d3-/],
-    output: {file: "dist/p5.viz.mjs", format: "es", banner},
-  },
-  {
-    input: "src/index.js",
-    plugins: [nodeResolve()],
-    onwarn,
-    output: [
-      {file: "dist/p5.viz.js", format: "umd", name: "p5Viz", banner},
-      {file: "dist/p5.viz.min.js", format: "umd", name: "p5Viz", banner, plugins: [terser()]},
-    ],
-  },
-];
+export default {
+  input: "src/index.js",
+  plugins: [nodeResolve()],
+  onwarn,
+  output: [
+    {file: "dist/p5.viz.js", format: "umd", name: "p5Viz", banner},
+    {file: "dist/p5.viz.min.js", format: "umd", name: "p5Viz", banner, plugins: [terser()]},
+  ],
+};

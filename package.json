@@ -17,17 +17,17 @@
     "data",
     "dataviz"
   ],
-  "main": "dist/p5.viz.js",
-  "module": "dist/p5.viz.mjs",
+  "type": "module",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "exports": {
-    ".": {
-      "import": "./dist/p5.viz.mjs",
-      "default": "./dist/p5.viz.js"
-    }
+    "umd": "./dist/p5.viz.min.js",
+    "default": "./src/index.js"
   },
   "unpkg": "dist/p5.viz.min.js",
   "jsdelivr": "dist/p5.viz.min.js",
   "files": [
+    "src",
     "dist"
   ],
   "scripts": {
