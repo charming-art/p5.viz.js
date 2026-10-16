@@ -1,6 +1,7 @@
 import {registerAPI} from "./register.js";
 import {Mark, encode} from "./mark.js";
-import {range, max, scaleLinear, scaleBand} from "d3";
+import {range, max} from "d3-array";
+import {scaleLinear, scaleBand} from "d3-scale";
 
 function defaultShape({x, y, w, h}) {
   fill("black");
