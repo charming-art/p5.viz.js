@@ -1,19 +1,52 @@
 {
-  "name": "p5.js-viz",
+  "name": "p5.viz",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "A data storytelling library for p5.js.",
+  "author": "Bairui Su",
   "license": "ISC",
-  "keywords": [],
-  "main": "index.js",
+  "homepage": "https://github.com/charming-art/p5.viz.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charming-art/p5.viz.js.git"
+  },
+  "keywords": [
+    "p5",
+    "p5.js",
+    "visualization",
+    "chart",
+    "data",
+    "dataviz"
+  ],
+  "type": "module",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "exports": {
+    "umd": "./dist/p5.viz.min.js",
+    "default": "./src/index.js"
+  },
+  "unpkg": "dist/p5.viz.min.js",
+  "jsdelivr": "dist/p5.viz.min.js",
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "rm -rf dist && rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "p5": "^2.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
     "p5": "^2.0.3",
+    "rollup": "^4.64.7",
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "d3": "^7.9.0"
+    "d3-array": "^3.2.4",
+    "d3-scale": "^4.0.2"
   }
 }
