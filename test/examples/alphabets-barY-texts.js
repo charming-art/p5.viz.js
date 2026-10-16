@@ -30,5 +30,5 @@ async function setup() {
   // Create a visualization and add the bar mark
   const viz = new p5.Viz();
   viz.add(barY);
-  viz.draw();
+  viz.plot();
 }

@@ -1,3 +1,5 @@
+import {Viz} from "./viz.js";
+
 export class Mark {
   constructor(options = {}) {
     this._options = options;
@@ -16,6 +18,12 @@ export class Mark {
   }
   useShape(shape) {
     this._options.shape = shape;
+  }
+  plot(options) {
+    const viz = new Viz(options);
+    viz.add(this);
+    viz.plot();
+    return viz;
   }
   render() {}
 }

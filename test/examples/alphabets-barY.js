@@ -11,9 +11,5 @@ async function setup() {
   barY.data(data);
   barY.x("letter");
   barY.y("frequency");
-
-  // Create a visualization and add the bar mark
-  const viz = new p5.Viz();
-  viz.add(barY);
-  viz.draw();
+  barY.plot();
 }
